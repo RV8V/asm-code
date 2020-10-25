@@ -2,6 +2,7 @@ Introduction
 ============
 
 Some snippets for assembly language (IA-64 - Intel architecture-64, linux).
+GAS x64 - GNU Assembler 
 
 License and Authors
 ===================
