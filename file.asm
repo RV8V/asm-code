@@ -19,17 +19,17 @@ _start:
 	mov $11,    %rdx
 	syscall
 
-	mov %rax, %r9
-	mov $0, %rax
-	mov %r9, %rdi
+	mov %rax,   %r9
+	mov $0,     %rax
+	mov %r9,    %rdi
 	mov $space, %rsi
-	mov $100, %rdx
+	mov $100,   %rdx
 	syscall
 
-	mov $1, %rax
-	mov $1, %rdi
+	mov $1,     %rax
+	mov $1,     %rdi
 	mov $space, %rsi
-	mov $100, %rdx
+	mov $100,   %rdx
 	syscall
 
 	mov $3,  %rax
