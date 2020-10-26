@@ -1,3 +1,5 @@
+%include "linux64.inc"
+
 section .data
 	digit db 0, 9
 
