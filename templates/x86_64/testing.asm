@@ -22,6 +22,9 @@ section .text
 %endmacro
 
 _start:
+	print_some 3, 4
+	exit
+
 	print_digits 3
 	print_digits 4
 	exit
