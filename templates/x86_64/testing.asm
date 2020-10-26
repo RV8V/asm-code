@@ -15,6 +15,12 @@ section .text
 	call _print_rax_digit
 %endmacro
 
+%macro print_some 2
+	mov rax, %1
+	add rax, %2
+	call _print_rax_digit
+%endmacro
+
 _start:
 	print_digits 3
 	print_digits 4
