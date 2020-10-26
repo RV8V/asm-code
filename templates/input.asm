@@ -13,7 +13,7 @@ _start:
 
     	mov $1,  %rax
     	mov $1,  %rdi
-   	 mov $a,  %rsi
+   	mov $a,  %rsi
     	mov $10, %rdx
     	syscall
 
