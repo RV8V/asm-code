@@ -35,4 +35,3 @@ _print_loop:
 	mov rdx, rbx
 	syscall
 	ret
-	
