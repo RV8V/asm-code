@@ -26,6 +26,11 @@ _loop:
 	jmp _loop
 %endmacro
 
+%macro uniq_loop 0
+%%loop:
+	jmp %%loop
+%endmacro
+
 _start:
 	_freeze
 	_freeze
