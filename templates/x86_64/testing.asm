@@ -4,7 +4,22 @@ section .data
 section .text
 	global _start
 
+%macro exit 0
+	mov rax, 60
+	mov rdi, 0
+	syscall
+%endmacro
+
+%macro print_digits 1
+	mov rax, %1
+	call _print_rax_digit
+%endmacro
+
 _start:
+	print_digits 3
+	print_digits 4
+	exit
+
 	mov rax, 7
 	call _print_rax_digit
 	call _print_div
