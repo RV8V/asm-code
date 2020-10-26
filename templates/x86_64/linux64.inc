@@ -4,6 +4,10 @@ SYS_EXIT     equ 60
 SYS_WRITE    equ 1
 COUNTER      equ 0
 LAST_SYMBOL  equ 0
+SYS_CLOSE    equ 60
+SYS_OPEN     equ 2
+O_WRONGLY    equ 1
+O_CREATE     equ 64
 
 %macro print 1
 	mov rax, %1
