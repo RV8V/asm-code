@@ -13,7 +13,7 @@ _start:
 	mov $0777, %rdx
 	syscall
 
-	mov %rax,    %r8
+	mov %rax,   %r8
 	mov %r8,    %rdi
 	mov $write, %rsi
 	mov $11,    %rdx
@@ -39,4 +39,3 @@ _start:
 	mov $60, %rax
 	mov $0,  %rdi
 	syscall
-	
