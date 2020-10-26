@@ -21,7 +21,16 @@ section .text
 	call _print_rax_digit
 %endmacro
 
+%macro _freeze 0
+_loop:
+	jmp _loop
+%endmacro
+
 _start:
+	_freeze
+	_freeze
+	exit
+
 	print_some 3, 4
 	exit
 
