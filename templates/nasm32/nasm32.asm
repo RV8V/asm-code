@@ -1,9 +1,3 @@
-BYTE_VALUE db 150
-WORD_VALUE dw 300
-BYTE_TABLE db 14, 15, 22, 45
-WORD_TABLE dw 134, 456, 214, 893
-MY_TABLE times 10 dw 0
-
 segment .data
 	data db "testing code", 0xa, 0xd
 	len equ $ - data
@@ -13,12 +7,21 @@ segment .data
 	name db 'test string ', 10
 	len_s equ $ - name
 
+	BYTE_VALUE db 150
+	WORD_VALUE dw 300
+	BYTE_TABLE db 14, 15, 22, 45
+	WORD_TABLE dw 134, 456, 214, 83
+	MY_TABLE times 10 dw 0
+
 	choice        db 'y', 10
         number        dw 643
         neg_number    dw -425
         big_number    dq 9382982
         real_number   dd 3.1342
         real_number_t dq 244.523
+
+	arr times   9 dw 0
+	stars times 9 db '*'
 
 segment .text
 	global _start
