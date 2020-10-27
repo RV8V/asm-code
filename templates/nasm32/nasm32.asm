@@ -1,8 +1,8 @@
-section .data
+segment .data
 	data db "testing code", 0xa, 0xd
 	len equ $ - data
 
-section .text
+segment .text
 	global _start
 
 _start:
