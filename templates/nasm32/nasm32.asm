@@ -11,7 +11,14 @@ segment .data
 	len_m equ $ - message
 	s2 times 9 db '*'
 	name db 'test string ', 10
-	len_s equ $ - name	
+	len_s equ $ - name
+
+	choice        db 'y', 10
+        number        dw 643
+        neg_number    dw -425
+        big_number    dq 9382982
+        real_number   dd 3.1342
+        real_number_t dq 244.523
 
 segment .text
 	global _start
@@ -48,6 +55,12 @@ _start:
 	mov ebx, 1
 	mov eax, 4
 	int 80h
+
+	mov edx, 2
+        mov ecx, choice
+        mov ebx, 1
+        mov eax, 4
+        int 0x80
 
 	mov cl, BYTE_TABLE[2]
 	mov cl, BYTE_TABLE + 2
