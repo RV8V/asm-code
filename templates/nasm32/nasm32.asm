@@ -1,3 +1,13 @@
+TOTAL_COUNT equ 50
+LENGTH      equ 20
+WIDTH       equ 10
+AREA        equ LENGTH * WIDTH
+
+%assign TOTAL 10
+%assign TOTAL 20
+
+%define PTR [EBX + 4]
+
 segment .data
 	data db "testing code", 0xa, 0xd
 	len equ $ - data
@@ -38,6 +48,9 @@ _start:
 	mov ebx, 1
 	mov eax, 4
 	int 0x80
+
+	mov ecx, TOTAL_COUNT
+	cmp eax, TOTAL_COUNT
 
         mov ebx,   [MY_TABLE]
 	mov dword  [ebx], 110 ; MY_TABLE + 0 = 110
