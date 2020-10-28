@@ -173,6 +173,24 @@ check_third_num:
         cmp ecx, [num3] ;47 - 31 > 0 -> jg
         jg _exit
         mov ecx, [num3]
+	ret
+
+	l1:
+        mov [num], eax
+        mov eax, 4
+        mov ebx, 1
+        push ecx
+
+        mov ecx, num
+        mov edx, 1
+        int 80h
+
+        mov eax, [num]
+        sub eax, '0'
+        inc eax
+        add eax, '0'
+        pop ecx
+        loop l1
 
 _exit:
         mov [largest], ecx
