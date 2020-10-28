@@ -52,6 +52,12 @@ segment .data
         num3 dd '31'
 	achar db '0'
 
+	file_name db "file.txt"
+	_m db "hello world", 0xa
+	_l equ $ - _m
+	_m_done db "written to file", 0xa
+	_len_done equ $ - _m_done
+
 x:
 	db 2
 	db 4
@@ -65,6 +71,10 @@ segment .bss
 	num2    resb 2
 	res     resb 1
 	largest resb 2
+	
+	fd_out  resb 1
+	fd_in   resb 1
+	info    resb 26	
 
 segment .text
 	global _start
@@ -90,6 +100,52 @@ display:
         int  80h
 
 _start:
+	mov eax, 8
+	mov ebx, file_name
+	mov ecx, 0777o
+	int 80h
+
+	mov [fd_out], eax
+
+	mov edx, _l
+	mov ecx, _m
+	mov ebx, [fd_out]
+	mov eax, 8
+	int 80h
+
+	mov eax, 6
+	mov ebx, [fd_out]
+
+	mov eax, 4
+	mov ebx, 1
+	mov ecx, _m_done
+	mov edx, _l_done
+	int 80h
+
+	mov eax, 5
+	mov ebx, file_name
+	mov ecx, 0
+	mov edx, 0777o
+	int 80h
+
+	mov [fd_in], eax
+
+	mov eax, 3
+	mov ebx, [fd_in]
+	mov ecx, info
+	mov edx, 26
+	int 80h
+
+	mov eax, 6
+	mov ebx, [fd_in]
+	int 80h
+
+	mov eax, 4
+	mov ebx, 1
+	mov ecx, info
+	mov edx, 26
+	int 80h
+
 	inc dword [count] ;icrement value in variable
 	inc word  [value]
 
