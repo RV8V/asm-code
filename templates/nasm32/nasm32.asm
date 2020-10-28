@@ -50,6 +50,7 @@ segment .data
         num1 dd '47'
         num2 dd '22'
         num3 dd '31'
+	achar db '0'
 
 x:
 	db 2
@@ -219,6 +220,29 @@ l1:
         add eax, '0'
         pop ecx
         loop l1
+	
+	call display_ascii
+        mov eax, 1
+        mov ebx, 0
+        int 80h
+
+display_ascii:
+        mov ecx, 256
+
+next:
+        push ecx
+        mov eax, 4
+        mov ebx, 1
+        mov ecx, achar
+        mov edx, 1
+        int 80h
+
+        pop ecx
+        mov dx, [achar]
+        cmp byte [achar], 0dh
+        inc byte [achar]
+        loop next
+        ret
 
 _exit:
         mov [largest], ecx
