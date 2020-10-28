@@ -45,10 +45,17 @@ segment .data
 	msg3 db "the sum is: "
 	len3 equ $ - msg3
 
+	message db "the largest digit is ", 0xa, 0xd
+        length equ $ - message
+        num1 dd '47'
+        num2 dd '22'
+        num3 dd '31'
+
 segment .bss
-	num1 resb 2
-	num2 resb 2
-	res  resb 1
+	num1    resb 2
+	num2    resb 2
+	res     resb 1
+	largest resb 2
 
 segment .text
 	global _start
@@ -157,6 +164,30 @@ _start:
 	mov cx, WORD_TABLE + 3
 	int 80h
 
+ 	mov ecx, [num1]
+        cmp ecx, [num2] ;47 - 22 > 0 -> jg
+        jg check_third_num
+        mov ecx, [num2]
+
+check_third_num:
+        cmp ecx, [num3] ;47 - 31 > 0 -> jg
+        jg _exit
+        mov ecx, [num3]
+
+_exit:
+        mov [largest], ecx
+        mov ecx, message
+        mov edx, length
+        mov ebx, 1
+        mov eax, 4
+        int 80h
+
+        mov ecx, [largest]
+        mov edx, 2
+        mov ebx, 1
+        mov eax, 4
+	int 80h
+	
 	mov eax, 1
 	mov ebx, 0
 	int 0x80
