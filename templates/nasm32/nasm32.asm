@@ -51,6 +51,14 @@ segment .data
         num2 dd '22'
         num3 dd '31'
 
+x:
+	db 2
+	db 4
+	db 3
+
+sum:
+	db 0
+
 segment .bss
 	num1    resb 2
 	num2    resb 2
@@ -59,6 +67,26 @@ segment .bss
 
 segment .text
 	global _start
+
+top:
+        add ebx, [ecx]
+        add ecx, 1
+        dec eax
+        jnz top
+
+done:
+        add ebx, '0'
+        mov [sum], ebx
+
+display:
+        mov edx, 1
+        mov ecx, sum
+        mov ebx, 1
+        mov eax, 4
+        int 80h
+
+        mov eax, 1
+        int  80h
 
 _start:
 	inc dword [count] ;icrement value in variable
@@ -175,7 +203,7 @@ check_third_num:
         mov ecx, [num3]
 	ret
 
-	l1:
+l1:
         mov [num], eax
         mov eax, 4
         mov ebx, 1
