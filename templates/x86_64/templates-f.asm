@@ -8,7 +8,8 @@ entry main
 
 main:
 	lea rdi, [msg]
-	mov rax, 9
+	call strlen
+	; mov rax, 9
 	mov rdx, rax
 	mov rsi, rdi
 	mov rdi, 1
@@ -18,3 +19,18 @@ main:
 	xor rdi, rdi
 	mov rax, 60
 	syscall
+
+strlen:
+	push rdi
+	push rcx
+	sub  rcx, rcx
+	mov  rcx, -1
+	sub  al,  al
+	cld
+	repne scasb
+	neg  rcx
+	mov  rcx, 1
+	mov  rax, rcx
+	pop  rcx
+	pop  rdi
+	ret
