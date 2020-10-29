@@ -1,18 +1,29 @@
 format ELF64 executable 3
 
 segment readable writable
-	msg db 'message', 10, 0
-	_m  db 'this is another string', 10, 0
+	msg    db 'message', 10, 0
+	_m     db 'this is another string', 10, 0
+	prompt db 'please enter your name: ', 0
+	buffer rb 64
 
 segment readable executable
 entry main
 
+include 'unistd64.inc'
 include 'io.inc'
 
 main:
-	lea rdi, [msg]
+	lea  rdi, [prompt]
 	call print
-	lea rdi, [_m]
+	lea  rsi, [buffer]
+	mov  rdi, 64
+	call read
+	mov  rdi, rsi
+	call print
+
+	lea  rdi, [msg]
+	call print
+	lea  rdi, [_m]
 	call print
 	; call strlen
 	; mov rax, 9
@@ -23,7 +34,7 @@ main:
 	; syscall
 
 	xor rdi, rdi
-	mov rax, 60
+	mov rax, sys_exit
 	syscall
 
 strlen:
@@ -46,5 +57,13 @@ print:
 	mov rdx, rax
 	mov rsi, rdi
 	mov rdi, 1
-	mov rax, 1
+	mov rax, sys_write
 	syscall
+	ret
+
+read:
+	mov rdx, rdi
+	mov rdi, 0
+	mo  rax, sys_read
+	syscall
+	ret
